@@ -572,7 +572,7 @@ class MyEnergiHost:
                                       realm=realm,
                                       passwd=self.__password)
         except ConnectionResetError:
-            raise DataTimeout
+            raise
 
         handler = urllib.request.HTTPDigestAuthHandler(auth_handler)
         opener = urllib.request.build_opener(handler)
@@ -584,16 +584,16 @@ class MyEnergiHost:
             self._maybe_set_host(stream.headers)
         except urllib.error.HTTPError as stream:
             self._maybe_set_host(stream.headers)
-            raise DataTimeout
+            raise
         except urllib.error.URLError:
             # Timeout from server.
-            raise DataTimeout
+            raise
         except socket.timeout:
-            raise DataTimeout
+            raise
         except http.client.RemoteDisconnected:
-            raise DataTimeout
+            raise
         except ConnectionResetError:
-            raise DataTimeout
+            raise
         try:
             raw_data = stream.read()
             duration = time.time() - start_time
@@ -609,7 +609,7 @@ class MyEnergiHost:
                     raise DataTimeout
             return data
         except socket.timeout:
-            raise DataTimeout
+            raise
 
     def refresh(self, check=False):
         """Fetch most recent data."""
