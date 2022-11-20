@@ -606,7 +606,7 @@ class MyEnergiHost:
                     data['statustext'] = E_CODES[-status]
                     log.debug('request failed %s', suffix)
                     log.debug('Error code is %s', E_CODES[-status])
-                    raise DataTimeout
+                    raise DataTimeout(f'Request failed {suffix}, Error code {-status}: {E_CODES[-status]}')
             return data
         except socket.timeout:
             raise
