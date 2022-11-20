@@ -778,7 +778,7 @@ class MyEnergiHost:
             return res[key]
         return res
 
-    def get_minute_data(self, zid, day=None):
+    def get_minute_data(self, sno, day=None):
         """Return minute data for today"""
         if not day:
             day = time.localtime()
@@ -787,14 +787,14 @@ class MyEnergiHost:
         sm = 0
         mc = 1440
 
-        res = self._load(suffix='cgi-jday-Z{}-{}-{}-{}-{}-{}-{}'.format(zid,
-                                                                        day.tm_year,
-                                                                        day.tm_mon,
-                                                                        day.tm_mday,
-                                                                        sh,
-                                                                        sm,
-                                                                        mc))
-        key = 'U{}'.format(zid)
+        res = self._load(suffix='cgi-jday-{}-{}-{}-{}-{}-{}-{}'.format(self._sno_to_key(sno),
+                                                                       day.tm_year,
+                                                                       day.tm_mon,
+                                                                       day.tm_mday,
+                                                                       sh,
+                                                                       sm,
+                                                                       mc))
+        key = 'U{}'.format(sno)
         if key in res:
             return res[key]
         return res
