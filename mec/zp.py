@@ -764,16 +764,16 @@ class MyEnergiHost:
         res = self._load(suffix='cgi-zappi-mode-Z{}-0-2-0-0'.format(zid))
         print(res)
 
-    def get_hour_data(self, zid, day=None):
+    def get_hour_data(self, sno, day=None):
         """Return hourly data for today"""
         if not day:
             day = time.localtime()
 
-        res = self._load(suffix='cgi-jdayhour-Z{}-{}-{}-{}'.format(zid,
-                                                                   day.tm_year,
-                                                                   day.tm_mon,
-                                                                   day.tm_mday))
-        key = 'U{}'.format(zid)
+        res = self._load(suffix='cgi-jdayhour-{}-{}-{}-{}'.format(self._sno_to_key(sno),
+                                                                  day.tm_year,
+                                                                  day.tm_mon,
+                                                                  day.tm_mday))
+        key = 'U{}'.format(sno)
         if key in res:
             return res[key]
         return res
