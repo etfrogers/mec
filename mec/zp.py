@@ -266,7 +266,7 @@ class Zappi(MyEnergiDiverter):
 
     def __init__(self, data, hc):
         super().__init__(data, hc)
-        self.min_green_level = self._glimpse(data, 'mgl')
+        self.min_green_level = self._glimpse_safe(data, 'mgl')
 
         self._glimpse_safe(data, 'ectt4')
         self._glimpse_safe(data, 'ectt5')
